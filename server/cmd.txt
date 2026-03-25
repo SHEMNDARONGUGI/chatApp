@@ -1,0 +1,3 @@
+# pnpm init
+# pnpm install express mongoose socket.io cors dotenv
+# pnpm add nodemon --save-dev
