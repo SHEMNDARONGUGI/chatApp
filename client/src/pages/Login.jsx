@@ -6,7 +6,7 @@ export default function Login({ setUser }){
     const [username, setUsername] = useState("");
     const navigate = useNavigate();
     const handleLogin = async() =>{
-        const res = await registerUser(name);
+        const res = await registerUser(username);
         setUser(res.data);
         navigate("/");
     };

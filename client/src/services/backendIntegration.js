@@ -1,11 +1,11 @@
 import axios from "axios";
 import { io } from "socket.io-client";
 
-const BackendBaserUrl = "http:localhost:5000";
-const APIBaseUrl = "http:localhost:5000/api";
+const BackendBaserUrl = "http://localhost:5000";
+const APIBaseUrl = "http://localhost:5000/api";
 
 
-const API = axios.create({ baseURL: "APIBaseUrl" });
+const API = axios.create({ baseURL: APIBaseUrl });
 
 export const registerUser = (username) =>
   API.post("/auth/register", { username });
