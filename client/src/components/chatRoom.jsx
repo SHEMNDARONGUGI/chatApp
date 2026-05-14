@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 
-export default function chatRoom({ room, messages, user, socket}){
+export default function ChatRoom({ room, messages, user, socket}){
     const [chat, setChat] = useState("");
     const [typingUser, setTypingUser ] = useState("");
     const msgRef = useRef(null);
 
     useEffect(() => {
         socket.on("newMessage", (msg)=>{
-            msgRef.current.innerHTML += <P><strong>${msg.sender.username}</strong>: ${msg.content}</P>
+            msgRef.current.innerHTML += `<p><strong>${msg.sender.username}</strong>: ${msg.content}</p>`
 
         });
 
@@ -27,7 +27,7 @@ export default function chatRoom({ room, messages, user, socket}){
     }, []);
 
     const handleTyping = ()=>{
-        socket.emit(typing);
+        socket.emit("typing", user.username);
         setTimeout(() => socket.emit("stopTyping"), 1000);
     }
 
@@ -38,7 +38,7 @@ export default function chatRoom({ room, messages, user, socket}){
 
     return(
         <div>
-            <h2 className="text-2xl mb-2">room.name</h2>
+            <h2 className="text-2xl mb-2">{room.name}</h2>
             <div className="h-64 overflow-y-auto border mb-2 bg-gray-50" ref={msgRef}>
                 {messages.map((msg) => (
                     <p key={msg._id}>
@@ -61,7 +61,7 @@ export default function chatRoom({ room, messages, user, socket}){
                 placeholder="Type a message..."
                 />
 
-                <button className="bg-blue-500 text-white px-4 rounded onClick={handleSend}">
+                <button className="bg-blue-500 text-white px-4 rounded " onClick={handleSend}>
                     Send
                 </button>
             </div>

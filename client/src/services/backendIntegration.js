@@ -14,6 +14,6 @@ export const getRooms = () => API.get("/rooms");
 
 export const createRoom = (name) => API.post("/rooms", { name });
 
-export const getMessages = (roomId) => API.get(`/message/${roomId}`);
+export const getMessages = (roomId) => API.get(`/messages/${roomId}`);
 
 export const socket = io(BackendBaserUrl, { autoConnect: false });

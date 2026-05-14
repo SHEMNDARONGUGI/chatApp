@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getRooms, createRoom, getMessages, socket } from "../services/backendIntegration";
 
-import chatRoom from "../components/chatRoom";
+import ChatRoom from "../components/chatRoom";
 
 export default function Home({ user }){
     const [rooms, setRooms] = useState([]);
@@ -16,8 +16,13 @@ export default function Home({ user }){
 
     // [] - mounting
     const fetchRooms = async ()=>{
-        const res = await getRooms();
-        setRooms(res.data);
+        try {
+            const res = await getRooms();
+            setRooms(res.data);
+        } catch (error) {
+            console.error("Failed to fetch rooms: ", error.message)
+            
+        }
     };
 
     const handleJoinRoom = async (room) =>{
@@ -33,9 +38,11 @@ export default function Home({ user }){
                 <h2 className="text-lg mb-2">Rooms</h2>
                 <ul>
                     {rooms.map((room)=>{
-                        <li key={room._id} className="mb-2">
+                        return(
+                            <li key={room._id} className="mb-2">
                             <button onClick={() => handleJoinRoom(room)} className="w-full bg-gray-700 p-2 rounded hover: bg-gray-600">{room.name}</button>
                         </li>
+                        );
                     })}
                 </ul>
 
@@ -43,7 +50,7 @@ export default function Home({ user }){
 
             <main className="flex-1 p-4">
                 {currentRoom? (
-                    <chatRoom 
+                    <ChatRoom 
                         room={currentRoom}
                         messages={messages}
                         user={user}
