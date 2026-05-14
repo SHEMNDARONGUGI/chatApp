@@ -1,8 +1,8 @@
 import axios from "axios";
 import { io } from "socket.io-client";
 
-const BackendBaserUrl = "http://localhost:5000";
-const APIBaseUrl = "http://localhost:5000/api";
+const BackendBaserUrl = "https://chatapp-w80c.onrender.com";
+const APIBaseUrl = "https://chatapp-w80c.onrender.com/api";
 
 
 const API = axios.create({ baseURL: APIBaseUrl });
